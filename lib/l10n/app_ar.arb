@@ -1,0 +1,26 @@
+{
+    "@appTitle": {
+        "description": "The title of the application"
+    },
+    "appTitle": "تجربة فلاتر",
+    "@loginPrompt": {
+        "description": "Prompt message for the login screen"
+    },
+    "loginPrompt": "يلا نسجل حضور قبل المدير ما يعد الشفتات",
+    "@whatIsYourAccount": {
+        "description": "Placeholder for the input field for account name"
+    },
+    "whatIsYourAccount": "مين الحساب الي دلي دة؟",
+    "@oldPassword": {
+        "description": "Placeholder for the input field for password"
+    },
+    "oldPassword": "كلمة السر القديمة",
+    "@forgotPassword": {
+        "description": "Forgot password text"
+    },
+    "forgotPassword": "نسيت الباسورد ؟ طبيعي جدا كلنا بننسي وحدنا عنا 🙁",
+    "@loginButton": {
+        "description": "Login button text"
+    },
+    "loginButton": "ادخل الجحيم .... قصدي الشغل 🙂"
+} 
