@@ -1,0 +1,26 @@
+{
+    "@appTitle": {
+        "description": "The title of the application"
+    },
+    "appTitle": "Flutter Demo",
+    "@loginPrompt": {
+        "description": "Prompt message for the login screen"
+    },
+    "loginPrompt": "Let's register attendance before the manager counts the shifts",
+    "@whatIsYourAccount": {
+        "description": "Placeholder for the input field for account name"
+    },
+    "whatIsYourAccount": "What's your account?",
+    "@oldPassword": {
+        "description": "Placeholder for the input field for password"
+    },
+    "oldPassword": "Old Password",
+    "@forgotPassword": {
+        "description": "Forgot password text"
+    },
+    "forgotPassword": "Forgot password? Naturally, we completely forgot about it here 🙁",
+    "@loginButton": {
+        "description": "Login button text"
+    },
+    "loginButton": "Enter hell... I mean work 🙂"
+} 
