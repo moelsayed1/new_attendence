@@ -15,14 +15,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get loginPrompt => 'يلا نسجل حضور قبل المدير ما يعد الشفتات';
 
   @override
-  String get whatIsYourAccount => 'مين الحساب الي دلي دة؟';
+  String get whatIsYourAccount => 'مين الحساب الي جاي دة؟';
 
   @override
   String get oldPassword => 'كلمة السر القديمة';
 
   @override
   String get forgotPassword =>
-      'نسيت الباسورد ؟ طبيعي جدا كلنا بننسي وحدنا عنا 🙁';
+      'نسيت الباسورد ؟ طبيعي جدا كلنا بننسي روحنا هنا 🙁';
 
   @override
   String get loginButton => 'ادخل الجحيم .... قصدي الشغل 🙂';
