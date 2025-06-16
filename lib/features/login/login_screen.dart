@@ -10,6 +10,7 @@ import 'package:new_attendence/features/login/presentation/widgets/login_prompt_
 import 'package:new_attendence/features/login/presentation/widgets/login_input_fields.dart';
 import 'package:new_attendence/features/login/presentation/widgets/login_forgot_password_text.dart';
 import 'package:new_attendence/features/login/presentation/widgets/login_button.dart';
+import 'package:new_attendence/features/home/face_image_screen.dart'; // Import FaceImageScreen
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -34,6 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
           scaffoldMessengerKey.currentState?.showSnackBar(
             SnackBar(content: Text(state.message)),
           );
+          // Navigate to FaceImageScreen on successful login
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const FaceImageScreen()),
+          );
         } else if (state is LoginFailure) {
           scaffoldMessengerKey.currentState?.showSnackBar(
             SnackBar(content: Text(state.error)),
@@ -57,11 +63,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       LoginButton(
                         isLoading: state is LoginLoading,
                         onPressed: () {
-                          final String username = _inputFieldsKey.currentState?.username ?? '';
-                          final String password = _inputFieldsKey.currentState?.password ?? '';
-                          context.read<LoginCubit>().login(
-                            username,
-                            password,
+                          // final String username = _inputFieldsKey.currentState?.username ?? ''; // Commented out username
+                          // final String password = _inputFieldsKey.currentState?.password ?? ''; // Commented out password
+                          // context.read<LoginCubit>().login(
+                          //   username,
+                          //   password,
+                          // ); // Commented out login logic
+
+                          // Directly navigate to FaceImageScreen for testing
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const FaceImageScreen()),
                           );
                         },
                       ),
