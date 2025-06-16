@@ -5,6 +5,11 @@ import 'package:new_attendence/features/login/presentation/cubit/login_cubit.dar
 import 'package:new_attendence/main.dart'; // Import main.dart to access scaffoldMessengerKey
 import 'package:new_attendence/core/widgets/custom_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:new_attendence/features/login/presentation/widgets/login_logo_section.dart';
+import 'package:new_attendence/features/login/presentation/widgets/login_prompt_text.dart';
+import 'package:new_attendence/features/login/presentation/widgets/login_input_fields.dart';
+import 'package:new_attendence/features/login/presentation/widgets/login_forgot_password_text.dart';
+import 'package:new_attendence/features/login/presentation/widgets/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,21 +19,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _isPasswordVisible = false;
+  final GlobalKey<LoginInputFieldsState> _inputFieldsKey = GlobalKey<LoginInputFieldsState>();
 
   @override
   void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
     super.dispose();
-  }
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      _isPasswordVisible = !_isPasswordVisible;
-    });
   }
 
   @override
@@ -47,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: const Color(0xFF7E6DEA), // Violet color from the image
+          backgroundColor: const Color(0xFF7E6DEA),
           body: SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -55,87 +50,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Column(
                     children: [
-                      // Image at the top
-                      Image.asset(
-                        'assets/images/alarm_clock.png',
-                        height: 200.h,
-                      ),
-                      SizedBox(height: 24.h),
-                      // Text above input fields
-                      Text(
-                        AppLocalizations.of(context)!.loginPrompt,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 57.h),
-                      // Account Input Field
-                      CustomTextField(
-                        controller: _usernameController,
-                        hintText: AppLocalizations.of(context)!.whatIsYourAccount,
-                        prefixIconPath: 'assets/images/username_logo.png',
-                      ),
-                      SizedBox(height: 16.h),
-                      // Password Input Field
-                      CustomTextField(
-                        controller: _passwordController,
-                        hintText: AppLocalizations.of(context)!.oldPassword,
-                        prefixIconPath: 'assets/images/password_logo.png',
-                        suffixIconPath: _isPasswordVisible
-                            ? 'assets/images/eye_visible.png'
-                            : 'assets/images/eye_visible.png',
-                        obscureText: !_isPasswordVisible,
-                        onSuffixIconTap: _togglePasswordVisibility,
-                      ),
-                      SizedBox(height: 10.h),
-                      // Forgot password text
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          AppLocalizations.of(context)!.forgotPassword,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 32.h),
-                      // Login Button
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50.h,
-                        child: ElevatedButton(
-                          onPressed: state is LoginLoading
-                              ? null
-                              : () {
-                                  context.read<LoginCubit>().login(
-                                        _usernameController.text,
-                                        _passwordController.text,
-                                      );
-                                },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff27B6E3),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.r),
-                            ),
-                          ),
-                          child: state is LoginLoading
-                              ? CircularProgressIndicator(
-                                  color: const Color(0xFF27B6E3),
-                                  strokeWidth: 2.w,
-                                )
-                              : Text(
-                                  AppLocalizations.of(context)!.loginButton,
-                                  style: TextStyle(
-                                    color: const Color(0xFFFFFFFF),
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                        ),
+                      const LoginLogoSection(),
+                      const LoginPromptText(),
+                      LoginInputFields(key: _inputFieldsKey),
+                      const LoginForgotPasswordText(),
+                      LoginButton(
+                        isLoading: state is LoginLoading,
+                        onPressed: () {
+                          final String username = _inputFieldsKey.currentState?.username ?? '';
+                          final String password = _inputFieldsKey.currentState?.password ?? '';
+                          context.read<LoginCubit>().login(
+                            username,
+                            password,
+                          );
+                        },
                       ),
                     ],
                   ),
